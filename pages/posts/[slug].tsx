@@ -1,5 +1,6 @@
 import fs from 'fs'
 import matter from 'gray-matter'
+import { GetStaticProps } from 'next'
 import { MDXRemote } from 'next-mdx-remote'
 import { serialize } from 'next-mdx-remote/serialize'
 import dynamic from 'next/dynamic'
@@ -23,7 +24,7 @@ const components = {
   Head,
 }
 
-export default function PostPage({ source, frontMatter }) {
+export default function PostPage({ source, frontMatter }: any) {
   return (
     <Layout>
       <header>
@@ -59,7 +60,7 @@ export default function PostPage({ source, frontMatter }) {
   )
 }
 
-export const getStaticProps = async ({ params }) => {
+export const getStaticProps: GetStaticProps = async ({ params }: any) => {
   const postFilePath = path.join(POSTS_PATH, `${params.slug}.mdx`)
   const source = fs.readFileSync(postFilePath)
 

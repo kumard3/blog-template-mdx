@@ -1,79 +1,82 @@
-# MDX Remote Example
 
-This example shows how a simple blog might be built using the [next-mdx-remote](https://github.com/hashicorp/next-mdx-remote) library, which allows mdx content to be loaded via `getStaticProps` or `getServerSideProps`. The mdx content is loaded from a local folder, but it could be loaded from a database or anywhere else.
+<p  align="center">
 
-The example also showcases [next-remote-watch](https://github.com/hashicorp/next-remote-watch), a library that allows next.js to watch files outside the `pages` folder that are not explicitly imported, which enables the mdx content here to trigger a live reload on change.
+<img  src="https://res.cloudinary.com/ddcg0rzlo/image/upload/v1640340715/nextjs-tailwind-typescript-banner_vslgq4.png"  alt="Next.js TypeScript Starter">
 
-Since `next-remote-watch` uses undocumented Next.js APIs, it doesn't replace the default `dev` script for this example. To use it, run `npm run dev:watch` or `yarn dev:watch`.
+</p>
+
+  
+
+<br />
+
+  
+
+<div  align="center"><strong>TypeScript with Tailwind starter for Next.js</strong></div>
+
+  
+
+<br />
+
+  
+
+## Features
+
+  
+
+- ⚡️ Next.js 12
+
+- ⚛️ React 17
+
+- ⛑ TypeScript
+- <img src="https://res.cloudinary.com/ddcg0rzlo/image/upload/v1640341222/tailwindcss_nzwqt7.svg" width="" height="16" />
+- 📏 ESLint — Find and fix problems in your code
+  
+
 
 ## Deploy your own
 
-Deploy the example using [Vercel](https://vercel.com?utm_source=github&utm_medium=readme&utm_campaign=next-example):
+Deploy the example using [Vercel](https://vercel.com?utm_source=github&utm_medium=readme&utm_campaign=next-example) (web only):
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/git/external?repository-url=https://github.com/vercel/next.js/tree/canary/examples/with-mdx-remote&project-name=with-mdx-remote&repository-name=with-mdx-remote)
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/git/external?repository-url=https://github.com/Cyphen12/tailwind-typescript-starter&project-name=tailwind-typescript-starte&repository-name=tailwind-typescript-starte)
 
-## How to use
+## Quick Start
 
-Execute [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app) with [npm](https://docs.npmjs.com/cli/init) or [Yarn](https://yarnpkg.com/lang/en/docs/cli/create/) to bootstrap the example:
+  
+
+The best way to start with this template is using [Create Next App](https://nextjs.org/docs/api-reference/create-next-app).
+
+  
+
+```
+
+yarn create next-app -e https://github.com/Cyphen12/tailwind-typescript-starter
+
+# or
+
+npx create-next-app -e https://github.com/Cyphen12/tailwind-typescript-starter
+
+```
+
+  
+
+### Development
+
+  
+
+To start the project locally, run:
+
+  
 
 ```bash
-npx create-next-app --example with-mdx-remote with-mdx-remote-app
-# or
-yarn create next-app --example with-mdx-remote with-mdx-remote-app
-# or
-pnpm create next-app -- --example with-mdx-remote with-mdx-remote-app
+
+yarn dev
+
 ```
 
-Deploy it to the cloud with [Vercel](https://vercel.com/new?utm_source=github&utm_medium=readme&utm_campaign=next-example) ([Documentation](https://nextjs.org/docs/deployment)).
+  
 
-## Notes
+Open `http://localhost:3000` with your browser to see the result.
 
-### Conditional custom components
+ 
 
-When using `next-mdx-remote`, you can pass custom components to the MDX renderer. However, some pages/MDX files might use components that are used infrequently, or only on a single page. To avoid loading those components on every MDX page, you can use `next/dynamic` to conditionally load them.
-
-For example, here's how you can change `getStaticProps` to pass a list of component names, checking the names in the page render function to see which components need to be dynamically loaded.
-
-```js
-import dynamic from 'next/dynamic'
-import Test from '../components/test'
-
-const SomeHeavyComponent = dynamic(() => import('SomeHeavyComponent'))
-
-const defaultComponents = { Test }
-
-export function SomePage({ mdxSource, componentNames }) {
-  const components = {
-    ...defaultComponents,
-    SomeHeavyComponent: componentNames.includes('SomeHeavyComponent')
-      ? SomeHeavyComponent
-      : null,
-  }
-
-  return <MDXRemote {...mdxSource} components={components} />
-}
-
-export async function getStaticProps() {
-  const source = `---
-  title: Conditional custom components
-  ---
-
-  Some **mdx** text, with a default component <Test name={title}/> and a Heavy component <SomeHeavyComponent />
-  `
-
-  const { content, data } = matter(source)
-
-  const componentNames = [
-    /<SomeHeavyComponent/.test(content) ? 'SomeHeavyComponent' : null,
-  ].filter(Boolean)
-
-  const mdxSource = await serialize(content)
-
-  return {
-    props: {
-      mdxSource,
-      componentNames,
-    },
-  }
-}
-```
+  
